@@ -1,8 +1,10 @@
 //Deps
-import React from 'react';
+import React,{useState} from 'react';
 //Components
 import Logo from '../../00-Components/Logo'
 import CountComponent from '../../00-Components/CountComponent';
+import {config} from '../../Config';
+import {PublicClientApplication} from '@azure/msal-browser'
 //Hooks
 import { useSelector,useDispatch } from 'react-redux';
 //Actions
@@ -12,6 +14,7 @@ const getCountfromStore  = (store) => store.count;
 
 const MainPage = () =>{
     const count = useSelector(getCountfromStore);
+    const [logInfo,setLogInfo] = useState({error:null,isAuthenticated:false,user:{}})
     const dispatch = useDispatch();
     return(
         <>
@@ -29,6 +32,7 @@ const MainPage = () =>{
                 addFunction={()=>dispatch(addToCountAction(1))} 
                 substractFunction={()=>dispatch(substractFromCountAction(1))}
             />
+            
         </>
     )
 }
